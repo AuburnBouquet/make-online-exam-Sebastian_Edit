@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>统一建模语言理论测试</title>
+    <style>
+        table tr td{
+            font-family: 华文楷体;
+            font-size:20px
+        }
+    </style>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function calc_score(){
+            let x_1 = get_text_value("part_one_one");
+            let x_2 = get_text_value("part_one_two");
+            let x_3 = get_radio_value("part_two_one");
+            let x_4 = get_radio_value("part_two_two");
+            let x_5 = get_checkbox_value("part_three_one");
+            let x_6 = get_checkbox_value("part_three_two");
+            let x_7 = get_radio_value("part_four_one");
+            let x_8 = get_radio_value("part_four_two");
+            let x_9 = get_text_value("part_four");
+            return x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 + x_9;
+        }
+        function get_text_value(text) {
+            let obj = document.getElementsByName(text);
+            if(obj[0].name === "part_one_one"){
+                if(obj[0].value === "统一建模语言") return 5;
+                else return 0;
+            } else if(obj[0].name === "part_one_two"){
+                let str = [{'key': '封装性', 'flag': 1}, {'key': '继承性', 'flag': 1}, {'key': '多态性', 'flag': 1}];
+                let count = 0;
+                str.forEach((e) => {
+                    for(var i = 0; i<obj.length; i++){
+                        if(obj[i].value === e.key && e.flag){ count += 5; e.flag = 0; }
+                    }
+                });
+                return count;
+            } else if(obj[0].name === "part_four"){
+                let count = 0;
+                let re = /(模型是对现实世界的简化和抽象，模型是对所研究的系统、过程、事物或概念的一种表达形式。可以是物理实体；可以是某种图形；或者是一种数学表达式。)/;
+                if(re.test(obj[0].value))
+                    count += 20;
+                return count;
+            } else return 0;
+        }
+        function get_radio_value(radio) {
+            let obj = document.getElementsByName(radio);
+            if(obj){
+                for(var i = 0; i<obj.length; i++){
+                    if(obj[i].checked) return parseInt(obj[i].value);
+                }
+            }
+            return 0;
+        }
+        function get_checkbox_value(checkbox) {
+            let obj = document.getElementsByName(checkbox);
+            if(obj[0].name === "part_three_one"){
+                if(obj[0].checked && obj[1].checked && obj[3].checked) return 10;
+                else return 0;
+            } else if(obj[0].name === "part_three_two"){
+                if(obj[0].checked && obj[1].checked && obj[2].checked) return 10;
+                else return 0;
+            } else return 0;
+        }
+        function submit_form() {
+            let score = calc_score();
+            alert('您的分数为：'+score);
+        }
+    </script>
+</head>
+<body>
+        <h1 name="head">&ensp;&nbsp;统一建模语言理论测试<br><br></h1>
+    <form>
+        <p><table><tr><td>&emsp;&emsp;考试科目：统一建模语言&emsp;&emsp;&emsp;&nbsp;时间：100分钟&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;得分：100</td></tr></table></p>
+        <p><table><tr><td>
+            &emsp;&emsp;班级：&emsp;&emsp;<input type="text" name="class">&nbsp;&nbsp;学号：<input type="text" name="id">&nbsp;&nbsp;姓名：<input type="text" name="name">
+        </td></tr></table><br></p>
+        <h2 name="head">&emsp;一、填空题（每空5分，共20分）<br><br></h2>
+        <p><table><tr><td>
+            &emsp;&emsp;&emsp;&emsp;1.UML的中文全称是：&nbsp;<input type="text" name="part_one_one" value="">
+        </td></tr></table></p>
+        <p><table><tr><td>
+            &emsp;&emsp;&emsp;&emsp;2.对象最突出的特征是：&nbsp;<input type="text" name="part_one_two">&nbsp;
+            <input type="text" name="part_one_two">&nbsp;
+            <input type="text" name="part_one_two"><br><br>
+        </td></tr></table></p>
+        <h2  name="head">&emsp;二、选择题（每题10分，共20分）<br><br></h2>
+        <p><table><tr><td>
+            &emsp;&emsp;&emsp;&emsp;1.UML与软件工程的关系是：<br><br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<input type="radio" name="part_two_one" value="0">&nbsp;(A)UML就是软件工程<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<input type="radio" name="part_two_one" value="10">&nbsp;(B)UML参与到软件工程中软件开发过程的几个阶段<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<input type="radio" name="part_two_one" value="0">&nbsp;(C)UML与软件工程无关<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<input type="radio" name="part_two_one" value="0">&nbsp;(D)UML是软件工程的一部分<br><br>
+        </td></tr></table></p>
+        <p><table><tr><td>
+            &emsp;&emsp;&emsp;&emsp;2.Java语言支持：<br><br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<input type="radio" name="part_two_two" value="10">&nbsp;(A)单继承<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<input type="radio" name="part_two_two" value="0">&nbsp;(B)多继承<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<input type="radio" name="part_two_two" value="0">&nbsp;(C)单继承和多继承都支持<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<input type="radio" name="part_two_two" value="0">&nbsp;(D)单继承和多继承都不支持<br><br>
+        </td></tr></table></p>
+        <h2 name="head">&emsp;三、多择题（每题10分，共20分）<br><br></h2>
+        <p><table><tr><td>
+            &emsp;&emsp;&emsp;&emsp;1.用例的粒度分为以下哪三种：<br><br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<input type="checkbox" name="part_three_one">&nbsp;(A)概述级<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<input type="checkbox" name="part_three_one">&nbsp;(B)需求级<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<input type="checkbox" name="part_three_one">&nbsp;(C)用户目标级<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<input type="checkbox" name="part_three_one">&nbsp;(D)子功能级<br><br>
+        </td></tr></table></p>
+        <p><table><tr><td>
+            &emsp;&emsp;&emsp;&emsp;2.类图由以下哪三部分组成：<br><br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<input type="checkbox" name="part_three_two">&nbsp;(A)名称(Name)<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<input type="checkbox" name="part_three_two">&nbsp;(B)属性(Attribute)<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<input type="checkbox" name="part_three_two">&nbsp;(C)操作(Operation)<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<input type="checkbox" name="part_three_two">&nbsp;(D)方法(Function)<br><br>
+        </td></tr></table></p>
+        <h2 name="head">&emsp;四、判断题（每题10分，共20分）<br><br></h2>
+        <p><table><tr><td>
+            &emsp;&emsp;&emsp;&emsp;1.用例图只是用于和客户交流和沟通的，用于确定需求。&nbsp;<input type="radio" name="part_four_one" value="0">√&nbsp;
+            <input type="radio" name="part_four_one" value="10">×<br>
+        </td></tr></table></p>
+        <p><table><tr><td>
+            &emsp;&emsp;&emsp;&emsp;2.在状态图中，终止状态在一个状态图中允许有任意多个。&nbsp;<input type="radio" name="part_four_two" value="10">√&nbsp;
+            <input type="radio" name="part_four_two" value="0">×<br><br>
+        </td></tr></table></p>
+    </form>
+        <h2 name="head">&emsp;五、简答题（每题20分，共20分）<br><br></h2>
+        <p><table><tr><td>
+            &emsp;&emsp;&emsp;&emsp;1.简述什么是模型以及模型的表现形式？<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;<textarea type="text" name="part_four" style="width:640px;height:128px" value=""></textarea>
+        </td></tr></table></p>
+
+    <form onsubmit="submit_form()">
+        &emsp;&emsp;&emsp;&emsp;<input type="submit" value="计算分数"><br><br>
+    </form>
+        <script>
+            let h = document.getElementsByName("head");
+            h.forEach((e) => {
+                e.style.fontFamily="STKaiTi"
+            });
+        </script>
+</body>
+</html>
